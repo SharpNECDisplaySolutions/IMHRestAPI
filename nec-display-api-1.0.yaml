@@ -1,0 +1,677 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: 'http://{displayIp}/api/{version}'
+    variables:
+      displayIp:
+        default: localhost
+        description: IP Address assigned to the display
+      version:
+        default: ''
+        description: >-
+          API version.  All paths require a version except the list path.  The
+          list path without version will return a list of API versions and their
+          status.
+info:
+  description: >-
+    Sharp NEC Display Solutions Displays API. This API defines the interface
+    available to external applications for NEC displays. Models supported are 
+    MA491, MA551, P435, P495, and P555.  Newer models not listed may be supported.
+  version: '1.0'
+  title: NEC Displays API
+  contact:
+    email: techsupport@sharpnec-displays.com
+    url: 'https://www.sharpnecdisplays.com'
+  license:
+    name: 'Sharp NEC Display Solutions of America, Inc.'
+    url: 'https://www.sharpnecdisplays.us'
+paths:
+  /power:
+    get:
+      operationId: getPowerState
+      summary: Get the power state
+      responses:
+        '200':
+          description: >-
+            Success.  The power state is returned.  0=off, 1=on and 2=power
+            saving (read-only)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putPowerState
+      summary: Set the power state.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: integer
+          required: true
+          description: Value of 0 turns the display off and 1 turns the display on.
+      responses:
+        '200':
+          description: Return is OK even if an error occured.  Check for  error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /inputs:
+    get:
+      operationId: getInput
+      summary: Gets current terminal input
+      responses:
+        '200':
+          description: >-
+            Success.  The current value of the input is returned.  Note that
+            before calling this, call inputs/list to get a list of the input
+            values and names.  Sample inputs are 1=HDMI1, 2=HDMI2, and
+            11=DisplayPort
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putInput
+      summary: Switch the current input terminal
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: integer
+          required: true
+          description: >-
+            Change the input.  Call inputs/list before this to get a list of
+            valid inputs and names. Sample inputs are 1=HDMI1, 2=HDMI2, and
+            11=DisplayPort
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /inputs/list:
+    get:
+      operationId: getInputList
+      summary: Returns the list of inputs by key-name pairs
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check for error value.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/KeyNameListValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /avmute:
+    get:
+      operationId: getAvmute
+      summary: Get the Audio/Video mute status
+      responses:
+        '200':
+          description: >-
+            Success.  The current value of avmute is returned. 0 Video and Audio
+            mute OFF, 1 Video mute on, 2 Audio mute on,  3 Video and audio mute
+            on
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putAvmute
+      summary: Set the Audio/Video mute status
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: integer
+          required: true
+          description: >-
+            Value of 0 turns video and audio mute off, 1 turns video mute on, 2
+            turns audio mute on and 3 turns both video and audio mute on
+      responses:
+        '200':
+          description: Return is OK even if an error occurred. Check for error value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /product_name:
+    get:
+      operationId: getModelName
+      summary: Get the model name of the display
+      responses:
+        '200':
+          description: Success.  The current value of model name is returned.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentStringValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /usage:
+    get:
+      operationId: getUsage
+      summary: Get the usage status.
+      responses:
+        '200':
+          description: >-
+            Success.  Returns an array of usage elements, sucha as light hours
+            used and filter hours used.   Units returned are H (hours).  Whether
+            minutes or seconds are rounded off or rounded down depends on the
+            model.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentValueNameList'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /error_status:
+    get:
+      operationId: getErrorStatus
+      summary: Get the error status.
+      responses:
+        '200':
+          description: >-
+            Success.  Current error status of the display.  none=Normal with no
+            errors, cover=Abonormal cover, lens=without lens,
+            temperature=abnormal temp,fan=abnormal fan, light=Light source or
+            backlight not lit or light source usage time exceeded, system=System
+            error, power=abnormal power
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentErrorStatus'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /warning_status:
+    get:
+      operationId: getWarningStatus
+      summary: Get the warning status.
+      responses:
+        '200':
+          description: >-
+            Success.  Current warning status of the display.  none=Normal with
+            no errors, light=Light source replacement grace period,
+            filter=Filter cleaning time exceeded.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentWarningStatus'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /error_status/list:
+    get:
+      operationId: getErrorStatusList
+      summary: Get a list of the error status names.
+      responses:
+        '200':
+          description: Success.  List of error status names
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/ErrorStatusList'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /warning_status/list:
+    get:
+      operationId: getWarningStatusList
+      summary: Get a list of the warning status names
+      responses:
+        '200':
+          description: Success.  List of warning status names
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/WarningStatusList'
+                  - $ref: '#/components/schemas/ErrorValue'
+  /volume:
+    get:
+      operationId: getVolume
+      summary: Get the current volume
+      responses:
+        '200':
+          description: Success.  Return the current volume. Range is 0-100.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putVolume
+      summary: >-
+        Set the current volume.  The range is 0-100. n, +n  Change the current
+        setting to +n.  If the sign is omitted, it is treated as a positive
+        number. -n     Change the current setting to -n.  If there is a negative
+        sign, it is treated as a negative number. ++X    Change the current
+        value to current_value + X.  If there is a ++ sign, shift the specified
+        value in the + direction.
+               The amount of movement depends on the OSD.
+        --X    Change the current value to current_value - X.  If there is a --
+        sign, shift the specified value in the - direction.
+               The amount of movement depends on the OSD.
+        If the value of the paramter is not within a valid range the response
+        will be an error.  For example, if 15 is specified, but valid values are
+        0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: string
+          required: true
+          description: Change the volume.  Range is 0-100.
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /brightness:
+    get:
+      operationId: getBrightness
+      summary: Get the current brightness in relation to the background
+      responses:
+        '200':
+          description: Success.  Return the current brightness.  Range is 0-100.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putBrightness
+      summary: >-
+        Set the current brightness in relation to the background. Range is
+        0-100. n, +n  Change the current setting to +n.  If the sign is omitted,
+        it is treated as a positive number. -n     Change the current setting to
+        -n.  If there is a negative sign, it is treated as a negative number.
+        ++X    Change the current value to current_value + X.  If there is a ++
+        sign, shift the specified value in the + direction.
+               The amount of movement depends on the OSD.
+        --X    Change the current value to current_value - X.  If there is a --
+        sign, shift the specified value in the - direction.
+               The amount of movement depends on the OSD.
+        If the value of the paramter is not within a valid range the response
+        will be an error.  For example, if 15 is specified, but valid values are
+        0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: string
+          required: true
+          description: Change the brightness.  Range is 0-100
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /contrast:
+    get:
+      operationId: getContrast
+      summary: Get the current contrast
+      responses:
+        '200':
+          description: Success.  Return the current contrast. Range is 0-100.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putContrast
+      summary: >-
+        Set the current contrast.  Range is 0-100. n, +n  Change the current
+        setting to +n.  If the sign is omitted, it is treated as a positive
+        number. -n     Change the current setting to -n.  If there is a negative
+        sign, it is treated as a negative number. ++X    Change the current
+        value to current_value + X.  If there is a ++ sign, shift the specified
+        value in the + direction.
+               The amount of movement depends on the OSD.
+        --X    Change the current value to current_value - X.  If there is a --
+        sign, shift the specified value in the - direction.
+               The amount of movement depends on the OSD.
+        If the value of the paramter is not within a valid range the response
+        will be an error.  For example, if 15 is specified, but valid values are
+        0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: string
+          required: true
+          description: Change the contrast.  Range is 0-100.
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /color:
+    get:
+      operationId: getColor
+      summary: Get the current color
+      responses:
+        '200':
+          description: Success.  Return the current color.  Range is 0-100.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putColor
+      summary: >-
+        Set the current color. Range is 0-100. n, +n  Change the current setting
+        to +n.  If the sign is omitted, it is treated as a positive number.
+        -n     Change the current setting to -n.  If there is a negative sign,
+        it is treated as a negative number. ++X    Change the current value to
+        current_value + X.  If there is a ++ sign, shift the specified value in
+        the + direction.
+               The amount of movement depends on the OSD.
+        --X    Change the current value to current_value - X.  If there is a --
+        sign, shift the specified value in the - direction.
+               The amount of movement depends on the OSD.
+        If the value of the paramter is not within a valid range the response
+        will be an error.  For example, if 15 is specified, but valid values are
+        0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: string
+          required: true
+          description: Change the color.  Range is 0-100.
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /sharpness:
+    get:
+      operationId: getSharpness
+      summary: Get the current sharpness
+      responses:
+        '200':
+          description: Success.  Return the current sharpness. Range is 0-100.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putSharpness
+      summary: >-
+        Set the current sharpness. Range is 0-100. n, +n  Change the current
+        setting to +n.  If the sign is omitted, it is treated as a positive
+        number. -n     Change the current setting to -n.  If there is a negative
+        sign, it is treated as a negative number. ++X    Change the current
+        value to current_value + X.  If there is a ++ sign, shift the specified
+        value in the + direction.
+               The amount of movement depends on the OSD.
+        --X    Change the current value to current_value - X.  If there is a --
+        sign, shift the specified value in the - direction.
+               The amount of movement depends on the OSD.
+        If the value of the paramter is not within a valid range the response
+        will be an error.  For example, if 15 is specified, but valid values are
+        0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: string
+          required: true
+          description: Change the sharpness.
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /backlight:
+    get:
+      operationId: getBacklight
+      summary: Get the current backlight
+      responses:
+        '200':
+          description: Success.  Return the current backlight.  Range is 0-100.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putBacklight
+      summary: >-
+        Set the current backlight. Range is 0-100. n, +n  Change the current
+        setting to +n.  If the sign is omitted, it is treated as a positive
+        number. -n     Change the current setting to -n.  If there is a negative
+        sign, it is treated as a negative number. ++X    Change the current
+        value to current_value + X.  If there is a ++ sign, shift the specified
+        value in the + direction.
+               The amount of movement depends on the OSD.
+        --X    Change the current value to current_value - X.  If there is a --
+        sign, shift the specified value in the - direction.
+               The amount of movement depends on the OSD.
+        If the value of the paramter is not within a valid range the response
+        will be an error.  For example, if 15 is specified, but valid values are
+        0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned.
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: string
+          required: true
+          description: Change the backlight.  Range is 0-100.
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /freeze:
+    get:
+      operationId: getFreeze
+      summary: Get the current freeze
+      responses:
+        '200':
+          description: 'Success.  Return the current freeze. 0=off, 1=on'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentNumberValue'
+                  - $ref: '#/components/schemas/ErrorValue'
+    put:
+      operationId: putFreeze
+      summary: 'Set the current freeze.  0=Off, 1=On'
+      parameters:
+        - name: value
+          in: query
+          schema:
+            type: integer
+          required: true
+          description: Change the freeze.
+      responses:
+        '200':
+          description: Return is OK even if an error occurred.  Check the error value.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorValue'
+  /list:
+    get:
+      operationId: getSupportedFeatures
+      summary: Get the API supported features
+      responses:
+        '200':
+          description: Success.  Return the supported features list for each api version.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CurrentFeaturesList'
+                  - $ref: '#/components/schemas/ApiStatusList'
+                  - $ref: '#/components/schemas/ErrorValue'
+components:
+  schemas:
+    KeyNameListValue:
+      type: object
+      description: Object containing a KeyNameList array
+      properties:
+        elements:
+          $ref: '#/components/schemas/KeyNameList'
+    KeyNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyNamePair'
+    KeyNamePair:
+      type: object
+      description: A key name pair describing an element in the display
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    CurrentValueNameList:
+      type: array
+      description: An array containing current value name pairs
+      items:
+        $ref: '#/components/schemas/CurrentValueNamePair'
+    CurrentValueNamePair:
+      type: object
+      description: A current value and name pair describing an element in the display
+      properties:
+        current_value:
+          type: integer
+        name:
+          type: string
+    CurrentStringValue:
+      type: object
+      description: Current string value of the requested display property
+      properties:
+        current_value:
+          type: string
+    CurrentNumberValue:
+      type: object
+      description: Current number value of the requested display property
+      properties:
+        current_value:
+          type: integer
+    CurrentBoolValue:
+      type: object
+      description: Current boolean value of the requested display property
+      properties:
+        current_value:
+          type: boolean
+    ErrorValue:
+      type: object
+      description: >-
+        Error returned from command.  No error=0, parameter error=-100, busy
+        error=-200, unavailable error=-300
+      properties:
+        error:
+          type: integer
+          description: Specific error
+    CurrentErrorStatus:
+      type: object
+      description: >-
+        Current error status of the display.  none=Normal with no errors,
+        cover=Abonormal cover, lens=without lens, temperature=abnormal temp
+        fan=abnormal fan, light=Light source or backlight not lit or light
+        source usage time exceeded, system=System error,  power=abnormal power
+      properties:
+        error:
+          type: string
+          description: Error code of the display
+        id:
+          type: string
+          description: Error ID
+        detail:
+          type: string
+          description: Detail.  Note this field may or may not be present
+    CurrentWarningStatus:
+      type: object
+      description: >-
+        Current warning status of the display.  none=Normal with no errors,
+        light=Light source replacement grace period, filter=Filter cleaning time
+        exceeded.
+      properties:
+        warning:
+          type: string
+          description: Warning code of the display
+        id:
+          type: string
+          description: Warning ID
+        detail:
+          type: string
+          description: Detail.  Note this field may or may not be present
+    ErrorStatusList:
+      type: object
+      description: Object containing an array of statuses
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    WarningStatusList:
+      type: object
+      description: Object containing an array of statuses
+      properties:
+        warnings:
+          type: array
+          items:
+            type: string
+    CurrentFeaturesList:
+      type: object
+      description: Object containing an array of supported features
+      properties:
+        functions:
+          type: array
+          items:
+            type: string
+    ApiStatusList:
+      type: object
+      description: Object containing an array of api versions and status
+      properties:
+        elements:
+          $ref: '#/components/schemas/ApiList'
+    ApiList:
+      type: array
+      description: Array of api status
+      items:
+        $ref: '#/components/schemas/ApiStatus'
+    ApiStatus:
+      type: object
+      description: Object of API version and status
+      properties:
+        version:
+          type: string
+          description: API version
+        status:
+          type: string
+          description: >-
+            Status of the version.  Statuses are stable, experimental or
+            obsolete

@@ -1,0 +1,1599 @@
+<!doctype html>
+<html>
+  <head>
+    <title>NEC Displays API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>NEC Displays API</h1>
+    <div class="app-desc">Sharp NEC Display Solutions Displays API. This API defines the interface available to external applications for NEC displays. Models supported are  MA491, MA551, P435, P495, and P555.  Newer models not listed may be supported.</div>
+    <div class="app-desc">More information: <a href="https://www.sharpnecdisplays.com">https://www.sharpnecdisplays.com</a></div>
+    <div class="app-desc">Contact Info: <a href="techsupport@sharpnec-displays.com">techsupport@sharpnec-displays.com</a></div>
+    <div class="app-desc">Version: 1.0</div>
+    <div class="app-desc">BasePath:/api/{version}</div>
+    <div class="license-info">Sharp NEC Display Solutions of America, Inc.</div>
+    <div class="license-url">https://www.sharpnecdisplays.us</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Default">Default</a></h4>
+  <ul>
+  <li><a href="#getAvmute"><code><span class="http-method">get</span> /avmute</code></a></li>
+  <li><a href="#getBacklight"><code><span class="http-method">get</span> /backlight</code></a></li>
+  <li><a href="#getBrightness"><code><span class="http-method">get</span> /brightness</code></a></li>
+  <li><a href="#getColor"><code><span class="http-method">get</span> /color</code></a></li>
+  <li><a href="#getContrast"><code><span class="http-method">get</span> /contrast</code></a></li>
+  <li><a href="#getErrorStatus"><code><span class="http-method">get</span> /error_status</code></a></li>
+  <li><a href="#getErrorStatusList"><code><span class="http-method">get</span> /error_status/list</code></a></li>
+  <li><a href="#getFreeze"><code><span class="http-method">get</span> /freeze</code></a></li>
+  <li><a href="#getInput"><code><span class="http-method">get</span> /inputs</code></a></li>
+  <li><a href="#getInputList"><code><span class="http-method">get</span> /inputs/list</code></a></li>
+  <li><a href="#getModelName"><code><span class="http-method">get</span> /product_name</code></a></li>
+  <li><a href="#getPowerState"><code><span class="http-method">get</span> /power</code></a></li>
+  <li><a href="#getSharpness"><code><span class="http-method">get</span> /sharpness</code></a></li>
+  <li><a href="#getSupportedFeatures"><code><span class="http-method">get</span> /list</code></a></li>
+  <li><a href="#getUsage"><code><span class="http-method">get</span> /usage</code></a></li>
+  <li><a href="#getVolume"><code><span class="http-method">get</span> /volume</code></a></li>
+  <li><a href="#getWarningStatus"><code><span class="http-method">get</span> /warning_status</code></a></li>
+  <li><a href="#getWarningStatusList"><code><span class="http-method">get</span> /warning_status/list</code></a></li>
+  <li><a href="#putAvmute"><code><span class="http-method">put</span> /avmute</code></a></li>
+  <li><a href="#putBacklight"><code><span class="http-method">put</span> /backlight</code></a></li>
+  <li><a href="#putBrightness"><code><span class="http-method">put</span> /brightness</code></a></li>
+  <li><a href="#putColor"><code><span class="http-method">put</span> /color</code></a></li>
+  <li><a href="#putContrast"><code><span class="http-method">put</span> /contrast</code></a></li>
+  <li><a href="#putFreeze"><code><span class="http-method">put</span> /freeze</code></a></li>
+  <li><a href="#putInput"><code><span class="http-method">put</span> /inputs</code></a></li>
+  <li><a href="#putPowerState"><code><span class="http-method">put</span> /power</code></a></li>
+  <li><a href="#putSharpness"><code><span class="http-method">put</span> /sharpness</code></a></li>
+  <li><a href="#putVolume"><code><span class="http-method">put</span> /volume</code></a></li>
+  </ul>
+
+  <h1><a name="Default">Default</a></h1>
+  <div class="method"><a name="getAvmute"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /avmute</code></pre></div>
+    <div class="method-summary">Get the Audio/Video mute status (<span class="nickname">getAvmute</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  The current value of avmute is returned. 0 Video and Audio mute OFF, 1 Video mute on, 2 Audio mute on,  3 Video and audio mute on
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getBacklight"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /backlight</code></pre></div>
+    <div class="method-summary">Get the current backlight (<span class="nickname">getBacklight</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current backlight.  Range is 0-100.
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getBrightness"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /brightness</code></pre></div>
+    <div class="method-summary">Get the current brightness in relation to the background (<span class="nickname">getBrightness</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current brightness.  Range is 0-100.
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getColor"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /color</code></pre></div>
+    <div class="method-summary">Get the current color (<span class="nickname">getColor</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current color.  Range is 0-100.
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getContrast"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /contrast</code></pre></div>
+    <div class="method-summary">Get the current contrast (<span class="nickname">getContrast</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current contrast. Range is 0-100.
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getErrorStatus"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /error_status</code></pre></div>
+    <div class="method-summary">Get the error status. (<span class="nickname">getErrorStatus</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_4">inline_response_200_4</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Current error status of the display.  none&#x3D;Normal with no errors, cover&#x3D;Abonormal cover, lens&#x3D;without lens, temperature&#x3D;abnormal temp,fan&#x3D;abnormal fan, light&#x3D;Light source or backlight not lit or light source usage time exceeded, system&#x3D;System error, power&#x3D;abnormal power
+        <a href="#inline_response_200_4">inline_response_200_4</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getErrorStatusList"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /error_status/list</code></pre></div>
+    <div class="method-summary">Get a list of the error status names. (<span class="nickname">getErrorStatusList</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_6">inline_response_200_6</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  List of error status names
+        <a href="#inline_response_200_6">inline_response_200_6</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getFreeze"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /freeze</code></pre></div>
+    <div class="method-summary">Get the current freeze (<span class="nickname">getFreeze</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current freeze. 0&#x3D;off, 1&#x3D;on
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getInput"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /inputs</code></pre></div>
+    <div class="method-summary">Gets current terminal input (<span class="nickname">getInput</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  The current value of the input is returned.  Note that before calling this, call inputs/list to get a list of the input values and names.  Sample inputs are 1&#x3D;HDMI1, 2&#x3D;HDMI2, and 11&#x3D;DisplayPort
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getInputList"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /inputs/list</code></pre></div>
+    <div class="method-summary">Returns the list of inputs by key-name pairs (<span class="nickname">getInputList</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_1">inline_response_200_1</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check for error value.
+        <a href="#inline_response_200_1">inline_response_200_1</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getModelName"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /product_name</code></pre></div>
+    <div class="method-summary">Get the model name of the display (<span class="nickname">getModelName</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_2">inline_response_200_2</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  The current value of model name is returned.
+        <a href="#inline_response_200_2">inline_response_200_2</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPowerState"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /power</code></pre></div>
+    <div class="method-summary">Get the power state (<span class="nickname">getPowerState</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  The power state is returned.  0&#x3D;off, 1&#x3D;on and 2&#x3D;power saving (read-only)
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getSharpness"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /sharpness</code></pre></div>
+    <div class="method-summary">Get the current sharpness (<span class="nickname">getSharpness</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current sharpness. Range is 0-100.
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getSupportedFeatures"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /list</code></pre></div>
+    <div class="method-summary">Get the API supported features (<span class="nickname">getSupportedFeatures</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_8">inline_response_200_8</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the supported features list for each api version.
+        <a href="#inline_response_200_8">inline_response_200_8</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getUsage"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /usage</code></pre></div>
+    <div class="method-summary">Get the usage status. (<span class="nickname">getUsage</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_3">inline_response_200_3</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Returns an array of usage elements, sucha as light hours used and filter hours used.   Units returned are H (hours).  Whether minutes or seconds are rounded off or rounded down depends on the model.
+        <a href="#inline_response_200_3">inline_response_200_3</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getVolume"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /volume</code></pre></div>
+    <div class="method-summary">Get the current volume (<span class="nickname">getVolume</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Return the current volume. Range is 0-100.
+        <a href="#inline_response_200">inline_response_200</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getWarningStatus"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /warning_status</code></pre></div>
+    <div class="method-summary">Get the warning status. (<span class="nickname">getWarningStatus</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_5">inline_response_200_5</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  Current warning status of the display.  none&#x3D;Normal with no errors, light&#x3D;Light source replacement grace period, filter&#x3D;Filter cleaning time exceeded.
+        <a href="#inline_response_200_5">inline_response_200_5</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getWarningStatusList"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /warning_status/list</code></pre></div>
+    <div class="method-summary">Get a list of the warning status names (<span class="nickname">getWarningStatusList</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200_7">inline_response_200_7</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success.  List of warning status names
+        <a href="#inline_response_200_7">inline_response_200_7</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putAvmute"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /avmute</code></pre></div>
+    <div class="method-summary">Set the Audio/Video mute status (<span class="nickname">putAvmute</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Value of 0 turns video and audio mute off, 1 turns video mute on, 2 turns audio mute on and 3 turns both video and audio mute on </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred. Check for error value
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putBacklight"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /backlight</code></pre></div>
+    <div class="method-summary">Set the current backlight. Range is 0-100. n, +n  Change the current setting to +n.  If the sign is omitted, it is treated as a positive number. -n     Change the current setting to -n.  If there is a negative sign, it is treated as a negative number. ++X    Change the current value to current_value + X.  If there is a ++ sign, shift the specified value in the + direction.
+The amount of movement depends on the OSD.
+--X    Change the current value to current_value - X.  If there is a -- sign, shift the specified value in the - direction.
+The amount of movement depends on the OSD.
+If the value of the paramter is not within a valid range the response will be an error.  For example, if 15 is specified, but valid values are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned. (<span class="nickname">putBacklight</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the backlight.  Range is 0-100. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putBrightness"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /brightness</code></pre></div>
+    <div class="method-summary">Set the current brightness in relation to the background. Range is 0-100. n, +n  Change the current setting to +n.  If the sign is omitted, it is treated as a positive number. -n     Change the current setting to -n.  If there is a negative sign, it is treated as a negative number. ++X    Change the current value to current_value + X.  If there is a ++ sign, shift the specified value in the + direction.
+The amount of movement depends on the OSD.
+--X    Change the current value to current_value - X.  If there is a -- sign, shift the specified value in the - direction.
+The amount of movement depends on the OSD.
+If the value of the paramter is not within a valid range the response will be an error.  For example, if 15 is specified, but valid values are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned. (<span class="nickname">putBrightness</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the brightness.  Range is 0-100 </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putColor"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /color</code></pre></div>
+    <div class="method-summary">Set the current color. Range is 0-100. n, +n  Change the current setting to +n.  If the sign is omitted, it is treated as a positive number. -n     Change the current setting to -n.  If there is a negative sign, it is treated as a negative number. ++X    Change the current value to current_value + X.  If there is a ++ sign, shift the specified value in the + direction.
+The amount of movement depends on the OSD.
+--X    Change the current value to current_value - X.  If there is a -- sign, shift the specified value in the - direction.
+The amount of movement depends on the OSD.
+If the value of the paramter is not within a valid range the response will be an error.  For example, if 15 is specified, but valid values are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned. (<span class="nickname">putColor</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the color.  Range is 0-100. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putContrast"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /contrast</code></pre></div>
+    <div class="method-summary">Set the current contrast.  Range is 0-100. n, +n  Change the current setting to +n.  If the sign is omitted, it is treated as a positive number. -n     Change the current setting to -n.  If there is a negative sign, it is treated as a negative number. ++X    Change the current value to current_value + X.  If there is a ++ sign, shift the specified value in the + direction.
+The amount of movement depends on the OSD.
+--X    Change the current value to current_value - X.  If there is a -- sign, shift the specified value in the - direction.
+The amount of movement depends on the OSD.
+If the value of the paramter is not within a valid range the response will be an error.  For example, if 15 is specified, but valid values are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned. (<span class="nickname">putContrast</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the contrast.  Range is 0-100. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putFreeze"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /freeze</code></pre></div>
+    <div class="method-summary">Set the current freeze.  0&#x3D;Off, 1&#x3D;On (<span class="nickname">putFreeze</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the freeze. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putInput"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /inputs</code></pre></div>
+    <div class="method-summary">Switch the current input terminal (<span class="nickname">putInput</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the input.  Call inputs/list before this to get a list of valid inputs and names. Sample inputs are 1&#x3D;HDMI1, 2&#x3D;HDMI2, and 11&#x3D;DisplayPort </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putPowerState"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /power</code></pre></div>
+    <div class="method-summary">Set the power state. (<span class="nickname">putPowerState</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Value of 0 turns the display off and 1 turns the display on. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occured.  Check for  error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putSharpness"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /sharpness</code></pre></div>
+    <div class="method-summary">Set the current sharpness. Range is 0-100. n, +n  Change the current setting to +n.  If the sign is omitted, it is treated as a positive number. -n     Change the current setting to -n.  If there is a negative sign, it is treated as a negative number. ++X    Change the current value to current_value + X.  If there is a ++ sign, shift the specified value in the + direction.
+The amount of movement depends on the OSD.
+--X    Change the current value to current_value - X.  If there is a -- sign, shift the specified value in the - direction.
+The amount of movement depends on the OSD.
+If the value of the paramter is not within a valid range the response will be an error.  For example, if 15 is specified, but valid values are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned. (<span class="nickname">putSharpness</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the sharpness. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="putVolume"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /volume</code></pre></div>
+    <div class="method-summary">Set the current volume.  The range is 0-100. n, +n  Change the current setting to +n.  If the sign is omitted, it is treated as a positive number. -n     Change the current setting to -n.  If there is a negative sign, it is treated as a negative number. ++X    Change the current value to current_value + X.  If there is a ++ sign, shift the specified value in the + direction.
+The amount of movement depends on the OSD.
+--X    Change the current value to current_value - X.  If there is a -- sign, shift the specified value in the - direction.
+The amount of movement depends on the OSD.
+If the value of the paramter is not within a valid range the response will be an error.  For example, if 15 is specified, but valid values are 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, then an error is returned. (<span class="nickname">putVolume</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">value (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Change the volume.  Range is 0-100. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ErrorValue">ErrorValue</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "error" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Return is OK even if an error occurred.  Check the error value.
+        <a href="#ErrorValue">ErrorValue</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#ApiList"><code>ApiList</code></a></li>
+    <li><a href="#ApiStatus"><code>ApiStatus</code></a></li>
+    <li><a href="#ApiStatusList"><code>ApiStatusList</code></a></li>
+    <li><a href="#CurrentBoolValue"><code>CurrentBoolValue</code></a></li>
+    <li><a href="#CurrentErrorStatus"><code>CurrentErrorStatus</code></a></li>
+    <li><a href="#CurrentFeaturesList"><code>CurrentFeaturesList</code></a></li>
+    <li><a href="#CurrentNumberValue"><code>CurrentNumberValue</code></a></li>
+    <li><a href="#CurrentStringValue"><code>CurrentStringValue</code></a></li>
+    <li><a href="#CurrentValueNameList"><code>CurrentValueNameList</code></a></li>
+    <li><a href="#CurrentValueNamePair"><code>CurrentValueNamePair</code></a></li>
+    <li><a href="#CurrentWarningStatus"><code>CurrentWarningStatus</code></a></li>
+    <li><a href="#ErrorStatusList"><code>ErrorStatusList</code></a></li>
+    <li><a href="#ErrorValue"><code>ErrorValue</code></a></li>
+    <li><a href="#KeyNameList"><code>KeyNameList</code></a></li>
+    <li><a href="#KeyNameListValue"><code>KeyNameListValue</code></a></li>
+    <li><a href="#KeyNamePair"><code>KeyNamePair</code></a></li>
+    <li><a href="#WarningStatusList"><code>WarningStatusList</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+    <li><a href="#inline_response_200_1"><code>inline_response_200_1</code></a></li>
+    <li><a href="#inline_response_200_2"><code>inline_response_200_2</code></a></li>
+    <li><a href="#inline_response_200_3"><code>inline_response_200_3</code></a></li>
+    <li><a href="#inline_response_200_4"><code>inline_response_200_4</code></a></li>
+    <li><a href="#inline_response_200_5"><code>inline_response_200_5</code></a></li>
+    <li><a href="#inline_response_200_6"><code>inline_response_200_6</code></a></li>
+    <li><a href="#inline_response_200_7"><code>inline_response_200_7</code></a></li>
+    <li><a href="#inline_response_200_8"><code>inline_response_200_8</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="ApiList"><code>ApiList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Array of api status</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ApiStatus"><code>ApiStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object of API version and status</div>
+    <div class="field-items">
+      <div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> API version </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Status of the version.  Statuses are stable, experimental or obsolete </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ApiStatusList"><code>ApiStatusList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object containing an array of api versions and status</div>
+    <div class="field-items">
+      <div class="param">elements (optional)</div><div class="param-desc"><span class="param-type"><a href="#ApiList">ApiList</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentBoolValue"><code>CurrentBoolValue</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Current boolean value of the requested display property</div>
+    <div class="field-items">
+      <div class="param">current_value (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentErrorStatus"><code>CurrentErrorStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Current error status of the display.  none&#x3D;Normal with no errors, cover&#x3D;Abonormal cover, lens&#x3D;without lens, temperature&#x3D;abnormal temp fan&#x3D;abnormal fan, light&#x3D;Light source or backlight not lit or light source usage time exceeded, system&#x3D;System error,  power&#x3D;abnormal power</div>
+    <div class="field-items">
+      <div class="param">error (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Error code of the display </div>
+<div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Error ID </div>
+<div class="param">detail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Detail.  Note this field may or may not be present </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentFeaturesList"><code>CurrentFeaturesList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object containing an array of supported features</div>
+    <div class="field-items">
+      <div class="param">functions (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentNumberValue"><code>CurrentNumberValue</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Current number value of the requested display property</div>
+    <div class="field-items">
+      <div class="param">current_value (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentStringValue"><code>CurrentStringValue</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Current string value of the requested display property</div>
+    <div class="field-items">
+      <div class="param">current_value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentValueNameList"><code>CurrentValueNameList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>An array containing current value name pairs</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentValueNamePair"><code>CurrentValueNamePair</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>A current value and name pair describing an element in the display</div>
+    <div class="field-items">
+      <div class="param">current_value (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CurrentWarningStatus"><code>CurrentWarningStatus</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Current warning status of the display.  none&#x3D;Normal with no errors, light&#x3D;Light source replacement grace period, filter&#x3D;Filter cleaning time exceeded.</div>
+    <div class="field-items">
+      <div class="param">warning (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Warning code of the display </div>
+<div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Warning ID </div>
+<div class="param">detail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Detail.  Note this field may or may not be present </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ErrorStatusList"><code>ErrorStatusList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object containing an array of statuses</div>
+    <div class="field-items">
+      <div class="param">errors (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ErrorValue"><code>ErrorValue</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Error returned from command.  No error&#x3D;0, parameter error&#x3D;-100, busy error&#x3D;-200, unavailable error&#x3D;-300</div>
+    <div class="field-items">
+      <div class="param">error (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Specific error </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="KeyNameList"><code>KeyNameList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="KeyNameListValue"><code>KeyNameListValue</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object containing a KeyNameList array</div>
+    <div class="field-items">
+      <div class="param">elements (optional)</div><div class="param-desc"><span class="param-type"><a href="#KeyNameList">KeyNameList</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="KeyNamePair"><code>KeyNamePair</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>A key name pair describing an element in the display</div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="WarningStatusList"><code>WarningStatusList</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Object containing an array of statuses</div>
+    <div class="field-items">
+      <div class="param">warnings (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_1"><code>inline_response_200_1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_2"><code>inline_response_200_2</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_3"><code>inline_response_200_3</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_4"><code>inline_response_200_4</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_5"><code>inline_response_200_5</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_6"><code>inline_response_200_6</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_7"><code>inline_response_200_7</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200_8"><code>inline_response_200_8</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
